@@ -1,6 +1,7 @@
-
+import "./EightBall.css"
 import { useState } from "react";
 import answers from "./Answers";
+import getRandom from "./helpers";
 
 
 /** EightBall that displays random answers to questions
@@ -13,38 +14,23 @@ import answers from "./Answers";
 
 function EightBall({ resp = answers }) {
   const question = { msg: "Think of a question", color: "black"};
-  const [ball, setAnswer] = useState(question);
+  const [ball, setBall] = useState(question);
 
-  function getAnswer() {
+  function getBall() {
     const index = getRandom(resp.length - 1);
-    setAnswer(resp[index]);
+    setBall(resp[index]);
   }
 
   return (
     <div
       className="EightBall"
-      onClick={getAnswer}
+      onClick={getBall}
       style={{
-          backgroundColor:  ball.color,
-          color: "white",
-          width: "300px",
-          height: "300px",
-          borderRadius: "50%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
+        backgroundColor:  ball.color,
         }}>
       <p>{ ball.msg }</p>
     </div>
   )
-}
-
-/** Get a random integer between 0 and max
- * Helper function to EightBall
-*/
-
-function getRandom(max) {
-  return Math.floor(Math.random() * max);
 }
 
 export default EightBall;
